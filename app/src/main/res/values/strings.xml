@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">TestHVN</string>
+    <string name="global_base_url">url here</string>
+</resources>
