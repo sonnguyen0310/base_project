@@ -19,6 +19,4 @@ public class DefaultServiceFactory implements ServiceFactory {
         }
         return sInstance;
     }
-
-
 }
