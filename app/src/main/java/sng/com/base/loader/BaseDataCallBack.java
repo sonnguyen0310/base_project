@@ -5,11 +5,10 @@ import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 
-import sng.com.showme.R;
-import sng.com.showme.model.Data;
-import sng.com.showme.ui.fragment.BaseFragment;
-import sng.com.showme.util.Consts;
-import sng.com.showme.util.UserUtils;
+import sng.com.base.R;
+import sng.com.base.model.Data;
+import sng.com.base.ui.fragment.BaseFragment;
+import sng.com.base.util.Constant;
 
 /**
  * Created by son.nguyen on 4/30/2016.
@@ -38,16 +37,15 @@ public abstract class BaseDataCallBack<T> implements LoaderManager.LoaderCallbac
                 });
             }
         } else {
-            if (data.getReturnCode() == Consts.API_RETURN_CODE_ERROR) {
+            if (data.getReturnCode() == Constant.API_RETURN_CODE_ERROR) {
                 if (mFragment != null) {
                     mFragment.showConfirmDialog(data.getMessage(), null, true, null);
                 }
-            } else if (data.getReturnCode() == Consts.API_RETURN_CODE_ERROR_TOKEN || data.getReturnCode() == Consts.API_RETURN_CODE_EXPiRED_TOKEN) {
+            } else if (data.getReturnCode() == Constant.API_RETURN_CODE_ERROR_TOKEN || data.getReturnCode() == Constant.API_RETURN_CODE_EXPiRED_TOKEN) {
                 if (mFragment != null) {
                     mFragment.showConfirmDialog(data.getMessage(), null, true, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            UserUtils.logout(mFragment.getActivity());
                         }
                     });
                 }

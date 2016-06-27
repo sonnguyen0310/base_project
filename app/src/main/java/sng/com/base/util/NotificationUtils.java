@@ -20,7 +20,7 @@ public class NotificationUtils {
                                         String title, String message, @DrawableRes int icon,
                                         int notificationId) {
         Intent intent = new Intent(context, activityClass);
-        intent.putExtra(Consts.EXTRA_GCM_MESSAGE, message);
+        intent.putExtra(Constant.EXTRA_GCM_MESSAGE, message);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
@@ -46,7 +46,7 @@ public class NotificationUtils {
                                         String title, String message, Bitmap bitmapIcon,
                                         int notificationId) {
 
-        intent.putExtra(Consts.EXTRA_GCM_MESSAGE, message);
+        intent.putExtra(Constant.EXTRA_GCM_MESSAGE, message);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent,
                 PendingIntent.FLAG_CANCEL_CURRENT);
 

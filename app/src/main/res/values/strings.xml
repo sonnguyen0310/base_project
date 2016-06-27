@@ -4,4 +4,5 @@
     <string name="common_cancel">Cancel</string>
     <string name="common_ok">Ok</string>
     <string name="common_error">Error</string>
+    <string name="common_error_network">Network Error</string>
 </resources>

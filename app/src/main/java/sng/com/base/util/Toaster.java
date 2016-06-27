@@ -9,7 +9,8 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Toast;
 
-import sng.com.showme.BaseApplication;
+import sng.com.base.BaseApplication;
+
 
 public class Toaster {
 

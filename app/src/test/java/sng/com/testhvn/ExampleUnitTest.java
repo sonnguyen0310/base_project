@@ -1,4 +1,4 @@
-package sng.com.base;
+package sng.com.testhvn;
 
 import org.junit.Test;
 

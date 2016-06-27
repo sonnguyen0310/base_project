@@ -229,7 +229,7 @@ public class BaseFragment extends Fragment {
         Toast.makeText(getContext(), text, Toast.LENGTH_SHORT).show();
     }
 
-    protected void replaceFragmmentWithStack(android.support.v4.app.Fragment fragment, String tag) {
+    protected void replaceFragmentWithStack(android.support.v4.app.Fragment fragment, String tag) {
 //        try {
 //            Fragment fr = getFragmentManager().findFragmentByTag(tag);
 //            if (fr != null) {
@@ -262,7 +262,9 @@ public class BaseFragment extends Fragment {
             // set title for toolbar
             if (activity != null) {
                 activity.setSupportActionBar(mToolbar);
-
+                if (activity.getSupportActionBar() == null) {
+                    return;
+                }
                 if (!TextUtils.isEmpty(mTitle)) {
                     activity.getSupportActionBar().setTitle(mTitle);
                 } else {

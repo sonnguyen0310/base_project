@@ -10,7 +10,8 @@ import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
 import android.support.v4.content.ContextCompat;
 
-import sng.com.showme.BaseApplication;
+import sng.com.base.BaseApplication;
+
 
 /**
  * Created by son.nguyen on 4/16/2016.

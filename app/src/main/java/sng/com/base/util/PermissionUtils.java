@@ -23,7 +23,7 @@ public class PermissionUtils {
         }
         if (!permissions.isEmpty()) {
             if (context instanceof Activity){
-                ((Activity) context).requestPermissions(permissions.toArray(new String[permissions.size()]), Consts.REQUEST_CODE_SOME_FEATURES_PERMISSIONS);
+                ((Activity) context).requestPermissions(permissions.toArray(new String[permissions.size()]), Constant.REQUEST_CODE_SOME_FEATURES_PERMISSIONS);
             }
         }
     }

@@ -1,5 +1,6 @@
 package sng.com.base.util;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -27,7 +28,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -44,7 +44,7 @@ public class Utils {
     private static final String PREFERENCE = "Main_preference";
 
     public static JsonObject toJson(Response result) {
-        BufferedReader reader = null;
+        BufferedReader reader;
         StringBuilder sb = new StringBuilder();
         try {
             reader = new BufferedReader(new InputStreamReader(result.getBody().in()));
@@ -63,6 +63,7 @@ public class Utils {
         }
     }
 
+    @SuppressLint("CommitPrefEdits")
     public static void savePreference(Context context, String key, String value) {
         SharedPreferences sharedpreferences = context.getSharedPreferences(PREFERENCE, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
@@ -70,6 +71,7 @@ public class Utils {
         editor.commit();
     }
 
+    @SuppressLint("CommitPrefEdits")
     public static void savePreference(Context context, String key, boolean value) {
         SharedPreferences sharedpreferences = context.getSharedPreferences(PREFERENCE, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
@@ -77,6 +79,7 @@ public class Utils {
         editor.commit();
     }
 
+    @SuppressLint("CommitPrefEdits")
     public static void delPreference(Context context, String key) {
         SharedPreferences sharedpreferences = context.getSharedPreferences(PREFERENCE, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
@@ -143,22 +146,12 @@ public class Utils {
         return df.format(price);
     }
 
-    public static float double2float(Double number) {
-        if (number == 0 || number == null) {
-            return 0;
-        }
-        BigDecimal newNum = new BigDecimal(number);
-        float floatNum = newNum.floatValue();
-        return floatNum;
-    }
-
     public static String parseDate(String date) {
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-            SimpleDateFormat output = new SimpleDateFormat("yyyy-MM-dd");
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat output = new SimpleDateFormat("yyyy-MM-dd");
             Date tmpDate = sdf.parse(date);
-            String formattedTime = output.format(tmpDate);
-            return formattedTime;
+            return output.format(tmpDate);
         } catch (Exception e) {
             e.printStackTrace();
             return date;
@@ -167,11 +160,10 @@ public class Utils {
 
     public static String parseDateToPost(String date) {
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
-            SimpleDateFormat output = new SimpleDateFormat("yyyy-MM-dd");
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat output = new SimpleDateFormat("yyyy-MM-dd");
             Date tmpDate = sdf.parse(date);
-            String formattedTime = output.format(tmpDate);
-            return formattedTime;
+            return output.format(tmpDate);
         } catch (Exception e) {
             e.printStackTrace();
             return date;
@@ -182,6 +174,9 @@ public class Utils {
         String res = null;
         String[] proj = {MediaStore.Images.Media.DATA};
         Cursor cursor = context.getContentResolver().query(contentUri, proj, null, null, null);
+        if (cursor == null) {
+            return res;
+        }
         if (cursor.moveToFirst()) {
             int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
             res = cursor.getString(column_index);
@@ -191,7 +186,7 @@ public class Utils {
     }
 
     public static Bitmap getBitMapFromUri(Context context, Uri uri) {
-        InputStream imageStream = null;
+        InputStream imageStream;
         try {
             imageStream = context.getContentResolver().openInputStream(uri);
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -269,12 +264,11 @@ public class Utils {
     public static int getDurationMin(String start, String end) {
         int returnDuration = 0;
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
             Date startTime = sdf.parse(start);
             Date endTime = sdf.parse(end);
             long duration = (endTime.getTime() - startTime.getTime());
             returnDuration = (int) TimeUnit.MILLISECONDS.toMinutes(duration);
-            ;
             if (returnDuration < 1) {
                 returnDuration = 1;
             }

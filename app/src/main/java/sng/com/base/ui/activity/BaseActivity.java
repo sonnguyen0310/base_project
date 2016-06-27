@@ -2,7 +2,6 @@ package sng.com.base.ui.activity;
 
 import android.Manifest;
 import android.annotation.TargetApi;
-import android.content.BroadcastReceiver;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -25,18 +24,16 @@ import sng.com.base.BaseApplication;
 import sng.com.base.R;
 import sng.com.base.ui.dialog.ProgressDialogFragment;
 import sng.com.base.ui.fragment.BaseFragment;
-import sng.com.base.util.Consts;
+import sng.com.base.util.Constant;
 import sng.com.base.util.PermissionUtils;
 
-public class BaseActivity extends AppCompatActivity implements BaseApplication.OnToolBarCallback{
+public class BaseActivity extends AppCompatActivity implements BaseApplication.OnToolBarCallback {
 
     private static final String TAG = "BaseActivity";
     protected final Handler mHandler = new Handler();
     protected BaseApplication.OnToolBarCallback mOnToolbarListener;
     protected AlertDialog.Builder mBuilder;
     protected ProgressDialogFragment mProgressDialogFragment;
-    protected BroadcastReceiver wifiStateReceiver;
-    protected boolean wifiEnabled;
     private Toolbar mToolbar;
     private AlertDialog mAlertDialog;
 
@@ -60,9 +57,11 @@ public class BaseActivity extends AppCompatActivity implements BaseApplication.O
 
         setSupportActionBar(mToolbar);
 
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ico_back);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ico_back);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,7 +86,7 @@ public class BaseActivity extends AppCompatActivity implements BaseApplication.O
 
         int hasLocationPermission = ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
         int hasLocationCoarsePermission = ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
-        List<String> permissions = new ArrayList<String>();
+        List<String> permissions = new ArrayList<>();
         if (hasLocationPermission != PackageManager.PERMISSION_GRANTED) {
             permissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
         }
@@ -97,7 +96,7 @@ public class BaseActivity extends AppCompatActivity implements BaseApplication.O
         }
 
         if (!permissions.isEmpty()) {
-            requestPermissions(permissions.toArray(new String[permissions.size()]), Consts.REQUEST_CODE_SOME_FEATURES_PERMISSIONS);
+            requestPermissions(permissions.toArray(new String[permissions.size()]), Constant.REQUEST_CODE_SOME_FEATURES_PERMISSIONS);
         }
     }
 
@@ -109,12 +108,12 @@ public class BaseActivity extends AppCompatActivity implements BaseApplication.O
             permissions.add(Manifest.permission.READ_PHONE_STATE);
         }
         if (!permissions.isEmpty()) {
-            requestPermissions(permissions.toArray(new String[permissions.size()]), Consts.REQUEST_CODE_SOME_FEATURES_PERMISSIONS);
+            requestPermissions(permissions.toArray(new String[permissions.size()]), Constant.REQUEST_CODE_SOME_FEATURES_PERMISSIONS);
         }
     }
 
-    protected void replaceFragmmentWithStack(Fragment fragment, String tag) {
-        Log.d("sonnguyen", "replaceFragmmentWithStack: " + tag);
+    protected void replaceFragmentWithStack(Fragment fragment, String tag) {
+        Log.d("sonnguyen", "replaceFragmentWithStack: " + tag);
         try {
             Fragment fr = getSupportFragmentManager().findFragmentByTag(tag);
             if (fr != null) {
