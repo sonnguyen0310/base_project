@@ -8,4 +8,33 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.Dialog.Transparent" parent="Theme.AppCompat.Dialog">
+        <item name="android:colorBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="AppTheme.Widget.Toolbar" parent="Widget.AppCompat.Toolbar">
+        <item name="titleTextAppearance">@style/AppTheme.Widget.TextView.Header</item>
+        <item name="android:actionMenuTextColor">@color/text_color</item>
+    </style>
+
+    <style name="AppTheme.Widget.TextView.Header" parent="AppTheme.Widget.TextView.Font.VWHead.Bold">
+        <item name="android:layout_gravity">center_vertical|left</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="AppTheme.Widget.TextView.Font.VWHead.Bold" parent="android:Widget.Holo.Light.TextView">
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="dialogNoTitle" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">@dimen/tool_bar_title_size</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>
